@@ -7,14 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Common" />
-      <Folder Include="Products\Commands\CreateProduct" />
-      <Folder Include="Products\Commands\DeleteProduct" />
-      <Folder Include="Products\Commands\UpdateProduct" />
-      <Folder Include="Products\Queries\GetProductById" />
-    </ItemGroup>
-
-    <ItemGroup>
       <PackageReference Include="FluentValidation" Version="10.4.0" />
       <PackageReference Include="MediatR" Version="10.0.1" />
     </ItemGroup>

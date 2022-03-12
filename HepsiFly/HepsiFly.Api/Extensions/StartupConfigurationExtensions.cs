@@ -1,12 +1,13 @@
 using System.Reflection;
-using System.Security.Claims;
-using System.Text;
 using FluentValidation;
 using HepsiFly.Business.Categories.Commands.CreateCategory;
 using HepsiFly.Business.Categories.Commands.DeleteCategory;
 using HepsiFly.Business.Categories.Commands.UpdateCategory;
 using HepsiFly.Business.Categories.Queries.GetCategoriesByFilter;
 using HepsiFly.Business.Categories.Queries.GetCategoryById;
+using HepsiFly.Business.Products.Commands.CreateProduct;
+using HepsiFly.Business.Products.Commands.DeleteProduct;
+using HepsiFly.Business.Products.Commands.UpdateProduct;
 using HepsiFly.Common.Exceptions;
 using HepsiFly.Domain.Contracts;
 using HepsiFly.Domain.Entities;
@@ -14,6 +15,7 @@ using HepsiFly.Infrastructure.Base;
 using HepsiFly.Infrastructure.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using UpdateCategoryCommandValidator = HepsiFly.Business.Categories.Commands.UpdateCategory.UpdateCategoryCommandValidator;
 
 namespace HepsiFly.Api.Extensions;
 
@@ -22,7 +24,13 @@ namespace HepsiFly.Api.Extensions;
         public static IServiceCollection AddValidations(this IServiceCollection services)
         {
             services.AddSingleton<IValidator<CreateCategoryCommand>, CreateCategoryCommandValidator>();
+            services.AddSingleton<IValidator<UpdateCategoryCommand>, UpdateCategoryCommandValidator>();
+            services.AddSingleton<IValidator<DeleteCategoryCommand>, DeleteCategoryCommandValidator>();
             
+            services.AddSingleton<IValidator<CreateProductCommand>, CreateProductCommandValidator>();
+            services.AddSingleton<IValidator<UpdateProductCommand>, UpdateProductCommandValidator>();
+            services.AddSingleton<IValidator<DeleteProductCommand>, DeleteProductCommandValidator>();
+
             services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.InvalidModelStateResponseFactory = context =>

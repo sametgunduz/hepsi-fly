@@ -101,6 +101,14 @@ public interface IHepsiFlyException
             Title = "Not Found",
             Detail = "Category not found."
         };
+        
+        public static readonly HepsiFlyException ProductNotFound = new()
+        {
+            Code = "a2C2ha",
+            Title = "Not Found",
+            Detail = "Product not found."
+        };
+        
         #endregion
 
         #region Http Status Code 406

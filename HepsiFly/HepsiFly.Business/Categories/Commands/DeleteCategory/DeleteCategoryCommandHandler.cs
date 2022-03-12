@@ -15,11 +15,13 @@ public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryComman
 
     public async Task<string> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
     {
-        var result = await _repository.DeleteAsync(request.Id);
+        var category = await _repository.GetByIdAsync(request.Id);
         
-        if (result == null)
+        if (category == null)
             throw HepsiFlyExceptions.CategoryNotFound;
         
-        return result.Id;
+        await _repository.DeleteAsync(category.Id);
+        
+        return category.Id;
     }
 }

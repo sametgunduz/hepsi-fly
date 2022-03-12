@@ -1,10 +1,10 @@
 using HepsiFly.Api.Attributes;
 using HepsiFly.Api.Middlewares;
-using HepsiFly.Business.Categories.Commands.CreateCategory;
-using HepsiFly.Business.Categories.Commands.DeleteCategory;
-using HepsiFly.Business.Categories.Commands.UpdateCategory;
-using HepsiFly.Business.Categories.Queries.GetCategoriesByFilter;
-using HepsiFly.Business.Categories.Queries.GetCategoryById;
+using HepsiFly.Business.Products.Commands.CreateProduct;
+using HepsiFly.Business.Products.Commands.DeleteProduct;
+using HepsiFly.Business.Products.Commands.UpdateProduct;
+using HepsiFly.Business.Products.Queries.GetProductById;
+using HepsiFly.Business.Products.Queries.GetProductsByFilter;
 using HepsiFly.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -12,16 +12,16 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace HepsiFly.Api.Controllers;
 
-[Route("api/categories")]
+[Route("api/products")]
 [ApiController]
 [Produces("application/json")]
-public class CategoriesController : ControllerBase
+public class ProductsController : ControllerBase
 {
-    private readonly ILogger<CategoriesController> _logger;
+    private readonly ILogger<ProductsController> _logger;
     private readonly IMediator _mediator;
 
-    public CategoriesController(
-        ILogger<CategoriesController> logger,
+    public ProductsController(
+        ILogger<ProductsController> logger,
         IMediator mediator
     )
     {
@@ -32,13 +32,13 @@ public class CategoriesController : ControllerBase
     [HttpPost]
     [ValidateModelState]
     [Consumes("application/json")]
-    [ProducesResponseType(typeof(Category), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(Product), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryCommand command)
+    public async Task<IActionResult> CreateProduct([FromBody] CreateProductCommand command)
     {
-        var category = await _mediator.Send(command);
+        var product = await _mediator.Send(command);
         
-        return CreatedAtAction(nameof(GetById), new { id = category.Id }, category);
+        return CreatedAtAction(nameof(GetById), new { id = product.Id }, product);
     }
 
     [HttpPut("{id}")]
@@ -46,7 +46,7 @@ public class CategoriesController : ControllerBase
     [Consumes("application/json")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> UpdateCategory([BindRequired] string id, [FromBody] UpdateCategoryCommand command)
+    public async Task<IActionResult> UpdateProduct([BindRequired] string id, [FromBody] UpdateProductCommand command)
     {
         command.Id = id;
         await _mediator.Send(command);
@@ -58,9 +58,9 @@ public class CategoriesController : ControllerBase
     [Consumes("application/json")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> DeleteCategory([BindRequired] string id)
+    public async Task<IActionResult> DeleteProduct([BindRequired] string id)
     {
-        await _mediator.Send(new DeleteCategoryCommand
+        await _mediator.Send(new DeleteProductCommand
         {
             Id = id
         });
@@ -70,29 +70,29 @@ public class CategoriesController : ControllerBase
 
     [HttpGet("list")]
     [Consumes("application/json")]
-    [ProducesResponseType(typeof(List<Category>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(List<Product>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetByName([BindRequired] string name)
     {
-        var categoryList = await _mediator.Send(new GetCategoriesByFilterQuery()
+        var productList = await _mediator.Send(new GetProductsByFilterQuery()
         {
            Name = name
         });
         
-        return Ok(categoryList);
+        return Ok(productList);
     }
     
     [HttpGet("{id}",Name = "GetById")]
     [Consumes("application/json")]
-    [ProducesResponseType(typeof(Category), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(Product), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetById([BindRequired] string id)
     {
-        var category = await _mediator.Send(new GetCategoryByIdQuery
+        var product = await _mediator.Send(new GetProductByIdQuery
         {
             Id = id
         });
         
-        return Ok(category);
+        return Ok(product);
     }
 }
