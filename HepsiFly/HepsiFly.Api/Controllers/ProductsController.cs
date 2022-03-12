@@ -38,7 +38,7 @@ public class ProductsController : ControllerBase
     {
         var product = await _mediator.Send(command);
         
-        return CreatedAtAction(nameof(GetById), new { id = product.Id }, product);
+        return CreatedAtAction(nameof(ProductGetById), new { id = product.Id }, product);
     }
 
     [HttpPut("{id}")]
@@ -82,11 +82,11 @@ public class ProductsController : ControllerBase
         return Ok(productList);
     }
     
-    [HttpGet("{id}",Name = "GetById")]
+    [HttpGet("{id}",Name = "ProductGetById")]
     [Consumes("application/json")]
     [ProducesResponseType(typeof(Product), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> GetById([BindRequired] string id)
+    public async Task<IActionResult> ProductGetById([BindRequired] string id)
     {
         //burada ilk olarak redis e bakacağız
         var product = await _mediator.Send(new GetProductByIdQuery
