@@ -15,10 +15,5 @@ public class UpdateCategoryCommandValidator:  AbstractValidator<UpdateCategoryCo
             .NotEmpty()
             .NotNull()
             .WithName("name");
-        
-        RuleFor(x => x.Description)
-            .NotEmpty()
-            .NotNull()
-            .WithName("description");
     }
 }

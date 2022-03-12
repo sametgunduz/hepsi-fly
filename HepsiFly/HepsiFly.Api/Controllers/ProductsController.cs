@@ -88,6 +88,7 @@ public class ProductsController : ControllerBase
     [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetById([BindRequired] string id)
     {
+        //burada ilk olarak redis e bakacağız
         var product = await _mediator.Send(new GetProductByIdQuery
         {
             Id = id

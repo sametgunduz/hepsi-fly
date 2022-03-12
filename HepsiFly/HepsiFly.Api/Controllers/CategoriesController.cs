@@ -9,6 +9,7 @@ using HepsiFly.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.Extensions.Options;
 
 namespace HepsiFly.Api.Controllers;
 
