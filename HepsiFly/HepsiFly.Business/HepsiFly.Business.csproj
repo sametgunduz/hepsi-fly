@@ -9,6 +9,8 @@
     <ItemGroup>
       <PackageReference Include="FluentValidation" Version="10.4.0" />
       <PackageReference Include="MediatR" Version="10.0.1" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+      <PackageReference Include="StackExchange.Redis" Version="2.5.43" />
     </ItemGroup>
 
     <ItemGroup>
