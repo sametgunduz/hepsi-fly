@@ -60,3 +60,4 @@ Development ortamı olduğundan dolayı kulanılan **kaynak miktarları daha dü
 
 #### Buraya daha az istek alan b-service'e ait yaml dosyaları eklenmemiştir. b-service için a-service yapılandırması uygulanabilir, az istek alan bir service olduğundan dolayı ilgili kaynak miktarları ve deployment statejileri ona göre ayarlanabilir.
 
+Teşekkürler. :blush:
