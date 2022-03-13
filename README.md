@@ -30,7 +30,8 @@ docker-compose up
 
 ## Case 2: (Microservices Topology)
 
-Bu case'e ait kaynak çizim repo altında 'HepsiFly/Sources/hepsifly_ms_topology.html' dizinindedir.
+Bu case'e ait kaynak çizim repo altında [hepsifly_ms_topology.html](https://github.com/sametgunduz/hepsi-fly/blob/main/HepsiFly/Sources/hepsifly_ms_topology.html)  dizinindedir.
+
 - Dışarıdan gelen istekler yine uygulama ile aynı datacenter'da bulunan bir **load balancer** ile **istio apigateway** e iletilir ve buradan da istio apigateway **routing** ine göre ilgili **virtual service**'e yönlendirme yapılır.
 - Uygulama genel itibariyle **Kubernates** üzerinde çalışmaktadır. 
 - **ns:hepsifly** namespace'i altında ilgili microservice'ler bulunmaktadır. 
@@ -48,14 +49,14 @@ Bu case'e ait kaynak dosyalar repo altında 'HepsiFly/Sources/' dizinindedir.
 - #### [bitbucket-ci.yaml](https://github.com/sametgunduz/hepsi-fly/blob/main/HepsiFly/Sources/bitbucket-ci.yaml) 
  Bitbucket üzerinden ci yapmayı sağlayan yaml dosyasıdır. **master** ve **development** branch'leri için ilgili pipeline çalıştırır.
 
-- #### a-service-deployment.yaml 
+- #### [a-service-deployment.yaml](https://github.com/sametgunduz/hepsi-fly/blob/main/HepsiFly/Sources/a-service-deployment.yaml) 
 Buradaki yaml dosyamız fazla istek alan a-service(prod)'a aittir. 
 Yoğun istek alan bir service olmasına istinaden bu service deployment tanımlarındaki **resource** ve **request** tanımları buna yönelik tanımlanmıştır.
 Yine deployment stratejisi olarak **RollingUpdate** tercih edilmiştir. 
 Bu sayede rolling update ile yeni versiyon’a sahip podlar ayağa kaldırılırken eski versiona ait podlar silinir ve bir kesinti yaşanmamış olur.
 Aynı zamanda gelen istek miktarlarının artmasına yönelik yaml file'ın son adımında auto-scaling'de eklenmiştir.
 
-- #### a-service-dev-deployment.yaml
+- #### [a-service-dev-deployment.yaml](https://github.com/sametgunduz/hepsi-fly/blob/main/HepsiFly/Sources/a-service-dev-deployment.yaml) 
 Buradaki yaml dosyamız fazla istek alan a-service(development)'a aittir.
 Development ortamı olduğundan dolayı kulanılan **kaynak miktarları daha düşüktür** ve deployment stratejisi olarak **Recreate** tercih edilmiştir. 
 
