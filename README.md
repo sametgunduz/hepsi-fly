@@ -39,7 +39,7 @@ Bu case'e ait kaynak çizim repo altında [hepsifly_ms_topology.html](https://gi
 - Yapı içerisine **high availability**'nin sağlanabilmesi için **auto-scaling** yöntemi uygulanmış ve burada **Keda Scaler** ve **Prometheus** gibi araçlardan faydalanılmıştır.
 - Uygulama içerisindeki mesajlaşma event-based olduğundan hem **event-based bir auto-scaling** hemde **http request bazlı metriklere göre** auto-scaling uygulayabilmek için **KEDA + Prometheus** tercih edilmştir. 
 - Senaryoya göre hem helen http isteklere hemde event yoğunluğuna göre podlar scale edilmektedir. 
-- Bu yöntemleri tercih etmeyip basit olarak **k8s**'in **HPA** altyapısını kullanarakta (pod cpu ve ram'e bakarak) auto-scaling yapabiliriz.
+- Alternatif olarak bu yöntemlerin dışında basit olarak **k8s**'in **HPA** altyapısını kullanarakta (pod cpu ve ram'e bakarak) auto-scaling yapabiliriz.
 - Ölçeklenebilir bir data katmanı için ilgili database'ler cluster dışında tutulmuştur.
 - Topolojide yer verilmesede böyle bir uygulamada distributed tracing için **jeager**, structured loggin için fluent bir **elasticsearch ve kibana**, metrics içinse **prometeus ve grafana** tercih edilebilir.
 
