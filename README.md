@@ -9,7 +9,7 @@
 * Uygulama içerisinde category ve product şeklinde 2 farklı resource bulunmaktadır. 
 * Uygulama içerisinde **MediatR,MongoDB.Bson,StackExchange.Redis,FluentValidaton** gibi çeşitli package'lar kullanılmıştır. 
 * Uygulamada resource'ların data etkileşimleri için **repository pattern** uygulanmıştır.
-* Uygulamada **CQRS** pattern uygulanmış ve command-query'ler ayrıştırılmıştır. **Uygulama içerisinde sadece mongodb bulunmaktadır fakat normal şartlarda write için mssql query işlemleri içinse mongodb kullanıldığı varsayılmıştır.**
+* Uygulamada **CQRS** pattern uygulanmış ve command-query'ler ayrıştırılmıştır. **Uygulama içerisinde sadece mongodb bulunmaktadır fakat normal şartlarda write için mssql, read işlemleri içinse mongodb kullanıldığı varsayılmıştır.**
 * Product get servisinde redis implemente edilmiş fakat product'ın güncellenmesi, silinmesi gibi işlemlerin sonrasındaki cache handler'ları yazılmış varsayılmıştır.
 * Uygulamanın bir study-case olmasından dolayı ilgili resource entitiyler direk response model olarak verilmiştir herhangi bir dto vb. transfer objeleri kullanılmamıştır.
 
