@@ -1,16 +1,18 @@
 # HepsiFly Case Study
 
 ## Contens
-- Restful Service
+- Restful Api
 - Microservices Topology
 - CI/CD Yaml Files
 
 ## Case 1 : (Restful Service)
+* Uygulama *dotnet 6.0* ile geliştirilmiştir.
+* Uygulamayı ayağa kaldırabilmek için gerekli olan *dockerfile* ve *docker-compose* dosyaları oluşturulmuştur.
 * Uygulama içerisinde category ve product şeklinde 2 farklı resource bulunmaktadır. 
-* Uygulama içerisinde **MediatR,MongoDB.Bson,StackExchange.Redis,FluentValidaton** gibi çeşitli package'lar kullanılmıştır. 
+* Uygulamada **MediatR,MongoDB.Bson,StackExchange.Redis,FluentValidaton** gibi çeşitli araçlar kullanılmıştır. 
 * Uygulamada resource'ların data etkileşimleri için **repository pattern** uygulanmıştır.
-* Uygulamada **CQRS** pattern uygulanmış ve command-query'ler ayrıştırılmıştır. **Uygulama içerisinde sadece mongodb bulunmaktadır fakat normal şartlarda write için mssql, read işlemleri içinse mongodb kullanıldığı varsayılmıştır.**
-* Product get servisinde redis implemente edilmiş fakat product'ın güncellenmesi, silinmesi gibi işlemlerin sonrasındaki cache handler'ları yazılmış varsayılmıştır.
+* Uygulamada **CQRS** pattern uygulanmış ve command-query'ler ayrıştırılmıştır. **Mevcut uygulama içerisinde sadece mongodb bulunmaktadır fakat normal şartlarda write için mssql, read işlemleri içinse mongodb kullanıldığı varsayılmıştır.**
+* Products get servisinde redis implemente edilmiş fakat product'ın güncellenmesi, silinmesi gibi işlemlerin sonrasındaki cache handler'ları yazılmış varsayılmıştır.
 * Uygulamanın bir study-case olmasından dolayı ilgili resource entitiyler direk response model olarak verilmiştir herhangi bir dto vb. transfer objeleri kullanılmamıştır.
 
 #### Installation api
@@ -22,9 +24,8 @@ docker build -t hepsiflyapi .
 docker-compose up
 ```
 
->İlgili servise `http://localhost:4040` üzerinden erişilebilir.
- Dökümantasyon için `http://localhost:4040/swagger` a gidilebilir.
-
+>İlgili servis `http://localhost:4040` üzerinden host edilmektedir.
+ Api dökümanyasyonu için `http://localhost:4040/swagger` adresi ziyaret edilebilir.
 
 
 ## Case 2: (Microservices Topology)
@@ -51,13 +52,14 @@ Bu case'e ait kaynak dosyalar repo altında 'HepsiFly/Sources/' dizinindedir.
 Buradaki yaml dosyamız fazla istek alan a-service(prod)'a aittir. 
 Yoğun istek alan bir service olmasına istinaden bu service deployment tanımlarındaki **resource** ve **request** tanımları buna yönelik tanımlanmıştır.
 Yine deployment stratejisi olarak **RollingUpdate** tercih edilmiştir. 
-Bu sayede rolling update oranı ile yeni versiyon’a sahip podları ayağa kaldırılırken eski versiona ait podlar kaldırılır ve bir kesinti yaşanmamış olur.
-Aynı zamanda yaml file'ın son adımında auto-scaling'de eklenmiştir.
+Bu sayede rolling update ile yeni versiyon’a sahip podlar ayağa kaldırılırken eski versiona ait podlar silinir ve bir kesinti yaşanmamış olur.
+Aynı zamanda gelen istek miktarlarının artmasına yönelik yaml file'ın son adımında auto-scaling'de eklenmiştir.
 
 - #### a-service-dev-deployment.yaml
 Buradaki yaml dosyamız fazla istek alan a-service(development)'a aittir.
 Development ortamı olduğundan dolayı kulanılan **kaynak miktarları daha düşüktür** ve deployment stratejisi olarak **Recreate** tercih edilmiştir. 
 
 #### Buraya daha az istek alan b-service'e ait yaml dosyaları eklenmemiştir. b-service için a-service yapılandırması uygulanabilir, az istek alan bir service olduğundan dolayı ilgili kaynak miktarları ve deployment statejileri ona göre ayarlanabilir.
+
 
 Teşekkürler. :blush:
