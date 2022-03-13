@@ -14,7 +14,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sources", "Sources", "{6149
 	ProjectSection(SolutionItems) = preProject
 		..\..\..\..\Downloads\hepsifly_ms_topology.html = ..\..\..\..\Downloads\hepsifly_ms_topology.html
 		..\..\..\bitbucket-ci.yaml = ..\..\..\bitbucket-ci.yaml
-		..\..\..\a-service-deployment.yaml = ..\..\..\a-service-deployment.yaml
 		..\..\..\a-service-dev-deployment.yaml = ..\..\..\a-service-dev-deployment.yaml
 	EndProjectSection
 EndProject
@@ -44,5 +43,7 @@ Global
 		{9AE66E9E-FB99-41B5-BC5E-DA8591839F98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9AE66E9E-FB99-41B5-BC5E-DA8591839F98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9AE66E9E-FB99-41B5-BC5E-DA8591839F98}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
 EndGlobal

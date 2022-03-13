@@ -1,0 +1,47 @@
+#production deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: a-service
+  namespace: production
+  labels:
+    app: a-service
+spec:
+  selector:
+    matchLabels:
+      app: a-service
+  template:
+    metadata:
+      labels:
+        app: a-service
+    spec:
+      containers:
+        - name: a-service
+          image: docker.io/a-service:prod-01
+          imagePullPolicy: Always
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0
+  resources:
+    limits:
+    memory: 1200Mi
+    cpu: 2
+  requests:
+    memory: 600Mi
+    cpu: 1
+---
+apiVersion: keda.k8s.io/v1alpha1
+kind: ScaledObject
+metadata:
+  name: a-service
+  namespace: production
+  labels:
+    deploymentName: a-service
+spec:
+  scaleTargetRef:
+  deploymentName: a-service
+  pollingInterval: 5
+  cooldownPeriod: 30
+  maxReplicaCount: 10  

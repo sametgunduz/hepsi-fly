@@ -1,0 +1,26 @@
+#for a-service 
+image: microsoft/dotnet:latest
+
+options:
+  docker: true
+
+pipelines:
+  branches:
+    master:
+      - step:
+          script:
+          - dotnet restore
+          - dotnet build      
+          - dotnet test     
+          - docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
+          - docker build -f Dockerfile.production  -t myrepository/aservice .
+          - docker push myrepository/aservice
+    develop:
+      - step:
+          script:
+          - dotnet restore
+          - dotnet build      
+          - dotnet test           
+          - docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
+          - docker build -f Dockerfile.development -t myrepository/aservice:dev .
+          - docker push myrepository/aservice:dev
