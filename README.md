@@ -45,7 +45,7 @@ Bu case'e ait kaynak çizim repo altında 'HepsiFly/Sources/hepsifly_ms_topology
 ## Case 3: (CI/CD YAMLs)
 Bu case'e ait kaynak dosyalar repo altında 'HepsiFly/Sources/' dizinindedir.
 
-- #### bitbucket-ci.yaml
+- #### [bitbucket-ci.yaml](https://github.com/sametgunduz/hepsi-fly/blob/main/HepsiFly/Sources/bitbucket-ci.yaml) 
  Bitbucket üzerinden ci yapmayı sağlayan yaml dosyasıdır. **master** ve **development** branch'leri için ilgili pipeline çalıştırır.
 
 - #### a-service-deployment.yaml 
