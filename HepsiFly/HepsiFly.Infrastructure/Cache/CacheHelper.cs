@@ -1,7 +1,7 @@
 using System.Text;
 using Newtonsoft.Json;
 
-namespace HepsiFly.Business.Cache;
+namespace HepsiFly.Infrastructure.Cache;
 
 public class CacheHelper
 {

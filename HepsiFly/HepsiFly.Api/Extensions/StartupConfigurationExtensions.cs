@@ -8,10 +8,13 @@ using HepsiFly.Business.Categories.Queries.GetCategoryById;
 using HepsiFly.Business.Products.Commands.CreateProduct;
 using HepsiFly.Business.Products.Commands.DeleteProduct;
 using HepsiFly.Business.Products.Commands.UpdateProduct;
+using HepsiFly.Business.Products.Queries.GetProductById;
+using HepsiFly.Business.Products.Queries.GetProductsByFilter;
 using HepsiFly.Common.Exceptions;
 using HepsiFly.Domain.Contracts;
 using HepsiFly.Domain.Entities;
 using HepsiFly.Infrastructure.Base;
+using HepsiFly.Infrastructure.Cache;
 using HepsiFly.Infrastructure.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -46,16 +49,25 @@ namespace HepsiFly.Api.Extensions;
             return services;
         }
 
-        public static IServiceCollection AddMongoConfiguration(this IServiceCollection services,
+        public static IServiceCollection AddDataConfiguration(this IServiceCollection services,
             IConfiguration configuration
         )
         {
+            services.Configure<RedisSettings>(options =>
+            {
+                options.ConnectionString = configuration.GetSection(nameof(RedisSettings) + ":" + RedisSettings.ConnectionStringValue).Value;
+                options.Host = configuration.GetSection(nameof(RedisSettings) + ":" + RedisSettings.HostValue).Value;
+                options.Port = configuration.GetSection(nameof(RedisSettings) + ":" + RedisSettings.PortValue).Value;
+                options.Pwd = configuration.GetSection(nameof(RedisSettings) + ":" + RedisSettings.PortValue).Value;
+            });
+            
             services.Configure<MongoDbSettings>(options =>
             {
                 options.ConnectionString = configuration.GetSection(nameof(MongoDbSettings) + ":" + MongoDbSettings.ConnectionStringValue).Value;
                 options.Database = configuration.GetSection(nameof(MongoDbSettings) + ":" + MongoDbSettings.DatabaseValue).Value;
             });
 
+            services.AddSingleton<ICacheService, RedisCacheService>();
             services.AddSingleton<ICategoryRepository, CategoryRepository>();
             services.AddSingleton<IProductRepository, ProductRepository>();
             
@@ -71,6 +83,12 @@ namespace HepsiFly.Api.Extensions;
             services.AddTransient<IRequestHandler<DeleteCategoryCommand, string>, DeleteCategoryCommandHandler>();
             services.AddTransient<IRequestHandler<GetCategoryByIdQuery, Category>, GetCategoryByIdQueryHandler>();
             services.AddTransient<IRequestHandler<GetCategoriesByFilterQuery, List<Category>>, GetCategoriesByFilterQueryHandler>();
+            
+            services.AddTransient<IRequestHandler<CreateProductCommand, Product>, CreateProductCommandHandler>();
+            services.AddTransient<IRequestHandler<UpdateProductCommand, string>, UpdateProductCommandHandler>();
+            services.AddTransient<IRequestHandler<DeleteProductCommand, string>, DeleteProductCommandHandler>();
+            services.AddTransient<IRequestHandler<GetProductByIdQuery, Product>, GetProductByIdQueryHandler>();
+            services.AddTransient<IRequestHandler<GetProductsByFilterQuery, List<Product>>, GetProductsByFilterQueryHandler>();
             
             return services;
         }

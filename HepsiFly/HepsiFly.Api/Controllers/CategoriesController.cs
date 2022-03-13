@@ -31,7 +31,6 @@ public class CategoriesController : ControllerBase
     }
 
     [HttpPost]
-    [ValidateModelState]
     [Consumes("application/json")]
     [ProducesResponseType(typeof(Category), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status400BadRequest)]
@@ -43,7 +42,6 @@ public class CategoriesController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    [ValidateModelState]
     [Consumes("application/json")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status400BadRequest)]

@@ -1,4 +1,3 @@
-using HepsiFly.Business.Cache;
 using HepsiFly.Business.Categories.Queries.GetCategoryById;
 using HepsiFly.Common.Exceptions;
 using HepsiFly.Domain.Contracts;
@@ -13,7 +12,7 @@ public class GetProductByIdQueryHandler : IRequestHandler<GetProductByIdQuery, P
     private readonly IMediator _mediator;
     private readonly ICacheService _cache;
 
-    public GetProductByIdQueryHandler(IProductRepository repository,IMediator mediator,ICacheService cache)
+    public GetProductByIdQueryHandler(IProductRepository repository, IMediator mediator, ICacheService cache)
     {
         _repository = repository;
         _mediator = mediator;

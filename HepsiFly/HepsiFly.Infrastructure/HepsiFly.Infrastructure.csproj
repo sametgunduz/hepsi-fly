@@ -10,6 +10,8 @@
       <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.0-preview.1.22076.8" />
       <PackageReference Include="MongoDB.Bson" Version="2.15.0" />
       <PackageReference Include="MongoDB.Driver" Version="2.15.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+      <PackageReference Include="StackExchange.Redis" Version="2.5.43" />
     </ItemGroup>
 
     <ItemGroup>

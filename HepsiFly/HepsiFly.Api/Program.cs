@@ -14,7 +14,7 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddMongoConfiguration(builder.Configuration);
+builder.Services.AddDataConfiguration(builder.Configuration);
 builder.Services.AddMediatRServices();
 builder.Services.AddValidations();
 

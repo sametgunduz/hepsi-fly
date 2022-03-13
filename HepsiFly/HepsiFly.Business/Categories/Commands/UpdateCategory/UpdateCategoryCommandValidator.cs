@@ -9,11 +9,6 @@ public class UpdateCategoryCommandValidator:  AbstractValidator<UpdateCategoryCo
         RuleFor(x => x.Name)
             .NotEmpty()
             .NotNull()
-            .WithName("id");
-        
-        RuleFor(x => x.Name)
-            .NotEmpty()
-            .NotNull()
             .WithName("name");
     }
 }

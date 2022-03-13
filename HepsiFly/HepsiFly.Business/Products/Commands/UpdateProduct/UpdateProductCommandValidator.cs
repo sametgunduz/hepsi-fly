@@ -9,21 +9,11 @@ public class UpdateProductCommandValidator:  AbstractValidator<UpdateProductComm
         RuleFor(x => x.Name)
             .NotEmpty()
             .NotNull()
-            .WithName("id");
-        
-        RuleFor(x => x.Name)
-            .NotEmpty()
-            .NotNull()
             .WithName("name");
         
         RuleFor(x => x.Price)
             .NotEmpty()
             .NotNull()
             .WithName("price");
-        
-        RuleFor(x => x.Currency)
-            .NotEmpty()
-            .NotNull()
-            .WithName("currency");
     }
 }

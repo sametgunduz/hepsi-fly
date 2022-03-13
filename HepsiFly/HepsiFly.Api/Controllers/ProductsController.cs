@@ -30,7 +30,6 @@ public class ProductsController : ControllerBase
     }
 
     [HttpPost]
-    [ValidateModelState]
     [Consumes("application/json")]
     [ProducesResponseType(typeof(Product), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status400BadRequest)]
@@ -42,13 +41,13 @@ public class ProductsController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    [ValidateModelState]
     [Consumes("application/json")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> UpdateProduct([BindRequired] string id, [FromBody] UpdateProductCommand command)
     {
         command.Id = id;
+        
         await _mediator.Send(command);
         
         return NoContent();
@@ -88,7 +87,6 @@ public class ProductsController : ControllerBase
     [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> ProductGetById([BindRequired] string id)
     {
-        //burada ilk olarak redis e bakacağız
         var product = await _mediator.Send(new GetProductByIdQuery
         {
             Id = id

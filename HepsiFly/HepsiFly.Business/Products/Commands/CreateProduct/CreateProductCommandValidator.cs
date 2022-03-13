@@ -15,10 +15,5 @@ public class CreateProductCommandValidator:  AbstractValidator<CreateProductComm
             .NotEmpty()
             .NotNull()
             .WithName("price");
-        
-        RuleFor(x => x.Currency)
-            .NotEmpty()
-            .NotNull()
-            .WithName("currency");
     }
 }

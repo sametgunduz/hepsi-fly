@@ -1,4 +1,4 @@
-namespace HepsiFly.Business.Cache;
+namespace HepsiFly.Domain.Contracts;
 
 public interface ICacheService
 {
