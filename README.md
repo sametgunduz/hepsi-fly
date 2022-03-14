@@ -41,7 +41,7 @@ Bu case'e ait kaynak çizim repo altında [hepsifly_ms_topology.html](https://gi
 - Senaryoya göre hem helen http isteklere hemde event yoğunluğuna göre podlar scale edilmektedir. 
 - Alternatif olarak bu yöntemlerin dışında basit olarak **k8s**'in **HPA** altyapısını kullanarakta (pod cpu ve ram'e bakarak) auto-scaling yapabiliriz.
 - Ölçeklenebilir bir data katmanı için ilgili database'ler cluster dışında tutulmuştur.
-- Topolojide yer verilmesede böyle bir uygulamada distributed tracing için **jeager**, structured loggin için fluent bir **elasticsearch ve kibana**, metrics içinse **prometeus ve grafana** tercih edilebilir.
+- Topolojide yer verilmesede böyle bir uygulamada distributed tracing için **jeager**, structured loggin için **fluent bit,elasticsearch ve kibana**, metrics içinse **prometeus ve grafana** tercih edilebilir.
 
 ## Case 3: (CI/CD YAMLs)
 Bu case'e ait kaynak dosyalar repo altında 'HepsiFly/Sources/' dizinindedir.
